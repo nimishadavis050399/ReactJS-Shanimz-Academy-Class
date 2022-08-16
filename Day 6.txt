@@ -1,0 +1,28 @@
+// step 1
+import React, { useState, useEffect } from "react";
+import Header from "./components/Header";
+import Home from "./components/Home";
+function App() {
+
+ const[hotels,setHotels]=useState({})
+ useEffect(() => {
+   const fetchData=async()=>{
+    await fetch('./restaurants.json')
+    .then((res)=>res.json())
+    .then((data)=>setHotels(data.restaurants))
+
+   }
+ fetchData();
+   
+ }, [])
+ 
+  console.log("data is", hotels)
+  return (
+    <>
+      <Header />
+      <Home />
+    </>
+  );
+}
+
+export default App;
