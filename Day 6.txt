@@ -4,7 +4,7 @@ import Header from "./components/Header";
 import Home from "./components/Home";
 function App() {
 
- const[hotels,setHotels]=useState({})
+ const[hotels,setHotels]=useState([])
  useEffect(() => {
    const fetchData=async()=>{
     await fetch('./restaurants.json')
