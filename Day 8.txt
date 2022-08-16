@@ -1,0 +1,71 @@
+App.js
+---------------------
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import Header from "./components/Header";
+import Home from "./components/Home";
+import RestaurantDetails from "./components/RestaurantDetails";
+import { Container } from 'react-bootstrap'
+function App() {
+  return (
+    <Router>
+      <Header />
+      <main className="py-3">
+        <Container>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/restaurant/:id' element={<RestaurantDetails />} />
+          </Routes>
+        </Container>
+      </main>
+    </Router>
+  );
+}
+
+export default App;
+
+
+-------------------------------
+RestaurantDeatils.js
+----------------------------------
+import React from 'react'
+
+function RestaurantDetails() {
+  return (
+    <div>Hello all
+        welcome to shanimmz academy
+        subscribe pls
+    </div>
+  )
+}
+
+export default RestaurantDetails
+--------------------------------------------
+Restauratns.js
+---------------------------------------
+import React from 'react'
+import {Card} from 'react-bootstrap'
+import {Link} from 'react-router-dom'
+function Restaurants({item}) {
+
+  return (
+    <Link to = {`restaurant/${item.id}`}>
+    <Card className="my-2 p-3 rounded">
+        <Card.Img variant="top" src={item.photograph} />
+        <Card.Body>
+            <Card.Title as="div">
+                {item.name}
+            </Card.Title>
+            <Card.Text as="div">
+                <p>Cuisine type : {item.cuisine_type}</p>
+            </Card.Text>
+            <Card.Text as="div">
+                <p>{item.neighborhood}</p>
+            </Card.Text>
+        </Card.Body>
+
+    </Card>
+    </Link>
+  )
+}
+
+export default Restaurants
