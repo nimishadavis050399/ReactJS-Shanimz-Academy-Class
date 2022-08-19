@@ -1,0 +1,63 @@
+Home.js
+--------------------------
+
+import { Row, Col } from 'react-bootstrap';
+import React, { useState, useEffect } from "react";
+import Restaurants from './Restaurants';
+function Home() {
+  const [hotels, setHotels] = useState([])
+  const[search,setSearch]=useState("")
+  
+  useEffect(() => {
+
+    const fetchData = async () => {
+      await fetch('./restaurants.json')
+        .then((res) => res.json())
+        .then((data) => setHotels(data.restaurants))
+    }
+    fetchData();
+
+
+  }, [])
+
+  console.log("data is", hotels)
+
+  return (
+    <>
+    <input placeholder="Search here" name="search" value={search} type="text" 
+    onChange={(event)=>
+    setSearch(event.target.value
+    )}/>
+    <Row>
+
+        {
+          hotels ? (
+            hotels.filter(item=>{
+              if (search === ""){
+                return item
+              }
+              else if(item.neighborhood.toLowerCase().includes(search.toLowerCase())){
+                return item
+              }
+            })
+            
+            .map(item => (
+              // <>
+              //   <p>{item.name}</p>
+              //   <p>{item.neighborhood}</p>
+              // </>
+              <Col sm={12} md={8} lg={6} xl={3}>
+                <Restaurants item={item}/>
+              </Col>
+            ))
+          ) : ("Error occured")
+        }
+      </Row>
+
+
+
+    </>
+  )
+}
+
+export default Home
